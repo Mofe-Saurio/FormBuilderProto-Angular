@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <h5 class="modal-title">Modal title</h5>
+
+</div>
+<form [formGroup]="parentForm">
+
+  <div formArrayName="subMethods" >
+    <div class="rounded border-fossil p-3 mb-3 wizard" *ngFor="let submethod of subMethods.controls; let subMethodIndex = index" [formGroupName]="subMethodIndex">
+
+      <div formGroupName="displayfields" >
+        <!-- <label>Display fields</label> -->
+        <div class="card-body">
+          <div *ngFor="let fields of listDisplayFields(subMethodIndex).controls let fieldIndex = index" [formGroupName]="fieldIndex">
+            <div *ngIf="displayIndex === fieldIndex">
+
+              <div class="input-group input-group-sm mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Field Name</span>
+                </div>
+                <input type="text" class="form-control" formControlName="fieldName" aria-label="Field Name" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-2"
+              *ngIf="(fields.get('type').value === 'TextField') ||
+              (fields.get('type').value === 'Checkbox') ||
+              (fields.get('type').value === 'Selector') ||
+              (fields.get('type').value === 'Button') "
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Label</span>
+                </div>
+                <input type="text" class="form-control" formControlName="label" aria-label="Label" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Type</span>
+                </div>
+                <input type="text" class="form-control" formControlName="type" aria-label="Type" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-2"
+              *ngIf="fields.get('type').value === 'TextField'"
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Validation</span>
+                </div>
+                <input type="text" class="form-control" formControlName="validation" aria-label="Validation" aria-describedby="inputGroup-sizing-sm">
+              </div>
+
+              <div class="input-group input-group-sm mb-2"
+              *ngIf="(fields.get('type').value === 'TextArea') ||
+              (fields.get('type').value === 'Button')"
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Place Holder</span>
+                </div>
+                <input type="text" class="form-control" formControlName="placeHolder" aria-label="Place Holder" aria-describedby="inputGroup-sizing-sm">
+              </div>
+
+              <div class="input-group input-group-sm mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Values</span>
+                </div>
+                <input type="text" class="form-control" formControlName="values" aria-label="Values" aria-describedby="inputGroup-sizing-sm">
+              </div>
+
+              <div class="input-group input-group-sm mb-2"
+              *ngIf="(fields.get('type').value === 'TextField') ||
+              (fields.get('type').value === 'Checkbox') ||
+              (fields.get('type').value === 'Selector') ||
+              (fields.get('type').value === 'Button') "
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Required</span>
+                </div>
+                <input type="text" class="form-control" formControlName="required" aria-label="Required" aria-describedby="inputGroup-sizing-sm">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <!-- Add submethods button -->
+
+</form>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="submit()">Save changes</button>
+</div>
